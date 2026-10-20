@@ -1,0 +1,80 @@
+{
+  "name": "h10_mt491",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/transactions/h10_mt491/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "ngx-build-plus:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/systex-host/transactions/h10_mt491",
+        "index": "apps/transactions/h10_mt491/src/index.html",
+        "main": "apps/transactions/h10_mt491/src/transactions-h10-mt491.ts",
+        "tsConfig": "apps/transactions/h10_mt491/tsconfig.app.json",
+        "styles": ["apps/transactions/h10_mt491/src/styles.scss"],
+        "scripts": [],
+        "singleBundle": true,
+        "extraWebpackConfig": "webpack.extra.js"
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            }
+          ],
+          "outputHashing": "none",
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "aot": true,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "buildOptimizer": true
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "h10_mt491:build:production"
+        },
+        "development": {
+          "buildTarget": "h10_mt491:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "h10_mt491:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve-static": {
+      "continuous": true,
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "h10_mt491:build",
+        "staticFilePath": "dist/apps/transactions/h10_mt491/browser",
+        "spa": true
+      }
+    }
+  }
+}
